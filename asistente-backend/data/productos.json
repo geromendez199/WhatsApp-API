@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "nombre": "Laptop Lenovo",
+    "precio": 450000
+  },
+  {
+    "id": 2,
+    "nombre": "Mouse Logitech",
+    "precio": 15000
+  },
+  {
+    "nombre": "Teclado Redragon",
+    "precio": 18000,
+    "id": 3
+  }
+]

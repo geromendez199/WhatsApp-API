@@ -1,0 +1,19 @@
+GET http://localhost:3000/productos
+
+
+POST http://localhost:3000/productos
+Content-Type: application/json
+
+{
+  "nombre": "Teclado Redragon",
+  "precio": 18000
+}
+
+PUT http://localhost:3000/productos/2
+Content-Type: application/json
+
+{
+  "precio": 16000
+}
+
+DELETE http://localhost:3000/productos/1
