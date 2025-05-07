@@ -1,13 +1,16 @@
 const express = require("express");
-const app = express();
-const port = 3000;
 const cors = require("cors");
+
+const app = express();
+const PORT = 3000;
+
+// 🔓 Permitimos CORS
 app.use(cors());
 
 app.get("/api/ping", (req, res) => {
-  res.send("pong");
+  res.send("¡Hola Gero!");
 });
 
-app.listen(port, () => {
-  console.log(`Servidor escuchando en http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Servidor backend escuchando en http://localhost:${PORT}`);
 });

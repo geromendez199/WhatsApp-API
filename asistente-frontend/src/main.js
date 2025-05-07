@@ -39,3 +39,8 @@ document.getElementById("pingButton").addEventListener("click", async () => {
     console.error(error);
   }
 });
+
+// filepath: c:\Users\gerom\Documents\WhatsApp-API\backend\app.js
+app.get("/api/ping", (req, res) => {
+  res.send("pong");
+});
