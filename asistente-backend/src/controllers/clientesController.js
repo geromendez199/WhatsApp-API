@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { enviarWhatsApp } = require("../services/whatsappService");
 
 const dataPath = path.join(__dirname, "../../data/clientes.json");
 
@@ -103,10 +104,37 @@ const eliminarCliente = (req, res) => {
   }
 };
 
+// POST - Enviar mensaje a un cliente por ID
+const enviarMensajeACliente = async (req, res) => {
+  const id = parseInt(req.params.id);
+  const { mensaje } = req.body;
+
+  if (!mensaje) {
+    return res.status(400).json({ error: "Mensaje es obligatorio" });
+  }
+
+  try {
+    const data = fs.readFileSync(dataPath, "utf8");
+    const clientes = JSON.parse(data);
+    const cliente = clientes.find((c) => c.id === id);
+
+    if (!cliente) {
+      return res.status(404).json({ error: "Cliente no encontrado" });
+    }
+
+    const sid = await enviarWhatsApp(cliente.telefono, mensaje);
+    res.json({ status: "ok", sid });
+  } catch (err) {
+    console.error("Error al enviar mensaje al cliente:", err);
+    res.status(500).json({ error: "No se pudo enviar el mensaje" });
+  }
+};
+
 // Exportamos todas las funciones
 module.exports = {
   getClientes,
   agregarCliente,
   editarCliente,
   eliminarCliente,
+  enviarMensajeACliente,
 };
