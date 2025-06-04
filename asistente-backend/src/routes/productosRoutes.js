@@ -1,4 +1,9 @@
-const express = require("express");
+let express;
+try {
+  express = require("express");
+} catch {
+  express = require("../expressFallback");
+}
 const router = express.Router();
 const {
   getProductos,

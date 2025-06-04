@@ -1,10 +1,24 @@
-const express = require("express");
-const cors = require("cors");
+try {
+  require("dotenv").config();
+} catch (err) {
+  console.warn("dotenv no instalado, se omite carga de variables");
+}
+let cors;
+try {
+  cors = require("cors");
+} catch (err) {
+  console.warn("Modulo cors no instalado, se omite CORS");
+  cors = () => (req, res, next) => next();
+}
 
-const app = express();
-const PORT = 3000;
+const app = require("./src/app");
+if (!app) {
+  console.error("No se pudo iniciar la aplicacion por falta de dependencias.");
+  process.exit(1);
+}
 
-// 🔓 Permitimos CORS
+const PORT = process.env.PORT || 3000;
+
 app.use(cors());
 
 app.get("/api/ping", (req, res) => {
